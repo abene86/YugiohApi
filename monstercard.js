@@ -1,10 +1,4 @@
-let monstercard = class monstercard{
-    cardName
-    atk
-    def
-    level
-    attribute
-    card_prices
+const monstercard = class monstercard{
     constructor(cardName, atk, def, level, attribute, card_prices){
         this.cardName = cardName
         this.atk = atk
