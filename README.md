@@ -6,8 +6,8 @@
 
 *Please fill in this information before submission*
 
-* **Student Name:** 
-* **Student G-Number:** 
+* **Student Name: Abenezer Gebeyehu** 
+* **Student G-Number: G01281469** 
 * **Heroku Deployment URL:**
 
 ### Documentation of your 7 Scenarios

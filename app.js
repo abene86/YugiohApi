@@ -3,10 +3,21 @@ const fetch = require('node-fetch')
 const app = express()
 const port = 3000
 
-const cities = ["Fairfax", "Vienna", "Falls Church", "Arlington"];
+const url = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?race=dragon';
 
-const populations = [24019, 16489, 14128, 236842];
+async function getDataForDragonCardsInYugioh(url){
+    let response = await fetch(url);
+    let jsonObjectsCards = await response.json();
+    let dataOFCards = await jsonObjectsCards;
+    return dataOFCards;
+}
 
+let dataOfCards = getDataForDragonCardsInYugioh(url);
+let data;
+dataOfCards.then( result =>{
+    data = result;
+});
+console.log(data)
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
