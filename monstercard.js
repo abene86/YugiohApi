@@ -3,7 +3,8 @@ const monstercard = class monstercard{
         this.cardName = cardName
         this.atk = atk
         this.def = def
-        this.level = attribute
+        this.level = level
+        this.attribute =attribute
         this.card_prices = card_prices
     }
 }

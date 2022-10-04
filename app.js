@@ -1,12 +1,9 @@
-const express = require('express')
-const fetch = require('node-fetch')
-const monstercard = require('./monstercard')
-const app = express()
-const port = 3000
+const express = require('express');
+const fetch = require('node-fetch');
+const app = express();
+const port = 3000;
 const url = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?race=dragon';
-let arrayDragoncards =[]
-makeSureListPopulated()
-console.log(arrayDragoncards)
+
 
 async function getDataForDragonCardsInYugioh(url){
     let response = await fetch(url);
