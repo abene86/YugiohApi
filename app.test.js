@@ -4,7 +4,7 @@ const monstercard = require("./monstercard");
 const processcard = require("./processcard")
 const cardJson = require("./sampleDataSetsForTesting")
 const monsterProcessor = setUpForTestinProcessorClass(cardJson)
-const mapOfCardInformations = monsterProcessor.getAllCardInformation()
+const mapOfCardInformations = monsterProcessor.mapOfCardInformations
 
 function setUpForTestinProcessorClass(cardJson){
     let monsterProcessor = new processcard(cardJson)
@@ -50,6 +50,21 @@ describe("Get the most expensive card from the given online store", ()=>{
 describe("Get the most expensive card from the given online store", ()=>{
   test("It should return null if the provided store is not in dataset", () =>{
     expect(monsterProcessor.getMostExpensiveCardPrice("abenezer_store")).toEqual(null);
+  });
+});
+describe("Check if the helper functin works correctly", ()=>{
+  test("It should return false if the level is not between 0>=  && <=12", () =>{
+    expect(monsterProcessor.isCardLevelAppropriate(13)).toEqual(false);
+  });
+});
+describe("Check if the helper functin works correctly", ()=>{
+  test("It should false if the card does not exist in the map", () =>{
+    expect(monsterProcessor.doesTheCardExistInCache("abenezer_store")).toEqual(false);
+  });
+});
+describe("Check if the helper functin works correctly", ()=>{
+  test("It should return false if store provided does not exist in the set", () =>{
+    expect(monsterProcessor. isItAnAppopriateStore("abenezer_store")).toEqual(false);
   });
 });
 
