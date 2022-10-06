@@ -130,7 +130,8 @@
     "attribute": "fire"
 }
   
-
+## Overview Implementations
+Created two classes monster and processcard which processes all monster cards. I also pulled some sample datasets to test my classes. The dataset could be found in sampleDataSetsForTesting
 
 ## Project Overview
 
