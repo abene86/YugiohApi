@@ -73,7 +73,8 @@ const processcard = class processcard{
     updateCardNameFromCache(monsterCardNameOrg, monsterCardNameNew){
         let modMonsterCard = this.mapOfCardInformations.get(monsterCardNameOrg);
         modMonsterCard.cardName = monsterCardNameNew
-        this.mapOfCardInformations.set(monsterCard.cardName, modMonsterCard)
+        this.mapOfCardInformations.set(monsterCardNameNew, modMonsterCard)
+        console.log( this.mapOfCardInformations.get(monsterCardNameNew))
     }
 }
 module.exports = processcard;

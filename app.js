@@ -54,11 +54,12 @@ app.post('/addnewcardinformation/cardname/:nameCard/cardlevel/:level/atk/:atk/de
   cardProcesser.postUserCreatedCardIntoCache(newMonsterCard)
   return res.send(cardProcesser.getInformationByCardName(req.params.nameCard));
 })
-app.post('/changeCardName/cardname/:originialnameCard/newcardname/:newCardName/', (req, res) => {
+app.post('/changeCardName/cardname/:originialnameCard/newcardname/:newCardName', (req, res) => {
   if(!cardProcesser.doesTheCardExistInCache(req.params.originialnameCard)){
     return res.status(400).send("Bad request name with card does not exist")
   }
   cardProcesser.updateCardNameFromCache(req.params.originialnameCard, req.params.newCardName)
+  console.log(cardProcesser.getInformationByCardName(req.params.newCardName));
   return res.send(cardProcesser.getInformationByCardName(req.params.newCardName));
 })
 
