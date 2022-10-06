@@ -6,18 +6,132 @@
 
 *Please fill in this information before submission*
 
-* **Student Name:** 
-* **Student G-Number:** 
-* **Heroku Deployment URL:**
+* **Student Name: Abenezer Gebeyehu** 
+* **Student G-Number: G01281469** 
+* **Heroku Deployment URL:https://agebeyeh-swe-432.herokuapp.com/**
 
 ### Documentation of your 7 Scenarios
 
 *Here please describe your 7 scenarios complete with details about the endpoint and expected output. We provide one example below. If using route parameters, please provide an example API query*
 
-* Retrieve a city from our Washington DC Database
-  * API Endpoint: GET /city/:cityID
-  * Example: GET /city/21
-  * Expected Output: "Fairfax"
+* Retrieve all the Dragon cards in Set
+  * API Endpoint: GET /
+  * Example: GET /
+  * Expected Output: Json Output list of all the cards
+* Retrieve the most expensive card from specified store (Stores supported are  ["tcgplayer", "ebay", "amazon", "coolstuffinc"])
+  * API Endpoint: GET /mostexpensivecardprice/:onlineStoreName
+  * Example: GET /mostexpensivecardprice/ebay
+  * Expected Output: 
+  {
+    "cardName": "Duel Link Dragon, the Duel Dragon",
+    "atk": 0,
+    "attribute": "DARK",
+    "card_prices": [
+        {
+            "cardmarket_price": "6.20",
+            "tcgplayer_price": "999.99",
+            "ebay_price": "949.99",
+            "amazon_price": "2.77",
+            "coolstuffinc_price": "0.00"
+        }
+    ]
+}
+* Retrieve all the card names from the list
+  * API Endpoint: GET /allCardNames
+  * Example: GET /allCardNames
+  * Expected Output: ALL the card names in json format should be outputed
+* Retrieve all the Dragon cards with a given level
+  * API Endpoint: GET /findAllCardWithGivenLevel/:level
+  * Example: GET /findAllCardWithGivenLevel/0
+  * Expected Output: 
+  [
+    {
+        "cardName": "Phantasmal Lord Ultimitl Bishbaalkin",
+        "atk": 0,
+        "def": 0,
+        "level": 0,
+        "attribute": "DARK",
+        "card_prices": [
+            {
+                "cardmarket_price": "1.55",
+                "tcgplayer_price": "1.85",
+                "ebay_price": "2.74",
+                "amazon_price": "1.54",
+                "coolstuffinc_price": "2.99"
+            }
+        ]
+    },
+    {
+        "cardName": "Ultimaya Tzolkin",
+        "atk": 0,
+        "def": 0,
+        "level": 0,
+        "attribute": "DARK",
+        "card_prices": [
+            {
+                "cardmarket_price": "0.22",
+                "tcgplayer_price": "0.21",
+                "ebay_price": "0.99",
+                "amazon_price": "0.34",
+                "coolstuffinc_price": "2.99"
+            }
+        ]
+    }
+]
+* Retrieve a dragon card using just the name
+  * API Endpoint: GET /cardinformation/:nameCard
+  * Example: GET /cardinformation/Blue-Eyes White Dragon
+  * Expected Output: 
+  {
+    "cardName": "Blue-Eyes White Dragon",
+    "atk": 3000,
+    "def": 2500,
+    "level": 8,
+    "attribute": "LIGHT",
+    "card_prices": [
+        {
+            "cardmarket_price": "0.40",
+            "tcgplayer_price": "0.62",
+            "ebay_price": "10.95",
+            "amazon_price": "3.90",
+            "coolstuffinc_price": "1.49"
+        }
+    ]
+}
+* Posts a new user created Dragon card in Set
+  * API Endpoint: POST /addnewcardinformation/cardname/:nameCard/cardlevel/:level/atk/:atk/def/:def/attribute/:attribute
+  * Example: POST/ /addnewcardinformation/cardname/Abenezer/cardlevel/12/atk/1000/def/800/attribute/fire
+  * Expected Output:
+  {
+    "cardName": "Abenezer",
+    "atk": "1000",
+    "def": "800",
+    "level": "12",
+    "attribute": "fire"
+}
+* Update a cardname with a new one
+  * API Endpoint: POST/ changeCardName/cardname/:originialnameCard/newcardname/:newCardName
+  * Example: POST/ /changeCardName/cardname/Abenezer/newcardname/The Hero
+  * Expected Output: 
+  Before:
+    {
+    "cardName": "Abenezer",
+    "atk": "1000",
+    "def": "800",
+    "level": "12",
+    "attribute": "fire"
+  }
+  After:
+  {
+    "cardName": "The Hero",
+    "atk": "1000",
+    "def": "800",
+    "level": "12",
+    "attribute": "fire"
+}
+  
+## Overview Implementations
+Created two classes monster and processcard which processes all monster cards. I also pulled some sample datasets to test my classes. The dataset could be found in sampleDataSetsForTesting
 
 ## Project Overview
 
