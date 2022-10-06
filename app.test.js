@@ -36,8 +36,20 @@ describe("Get all the monster cards with given level", ()=>{
 });
 
 describe("Get all the monster cards names from cache", ()=>{
-  test("It should return only the card names from the cache)", () =>{
+  test("It should return only the card names from the cache", () =>{
     expect(monsterProcessor.getOnlyCardNames()).toEqual(["7 Colored Fish", "Ancient Brain", ]);
+  });
+});
+
+describe("Get the most expensive card from the given online store", ()=>{
+  test("It should return the most expensive card given online store", () =>{
+    expect(monsterProcessor.getMostExpensiveCardPrice("amazon")).toEqual(mapOfCardInformations.get("Ancient Brain"));
+  });
+});
+
+describe("Get the most expensive card from the given online store", ()=>{
+  test("It should return null if the provided store is not in dataset", () =>{
+    expect(monsterProcessor.getMostExpensiveCardPrice("abenezer_store")).toEqual(null);
   });
 });
 

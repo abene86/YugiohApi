@@ -24,7 +24,7 @@ const processcard = class processcard{
                 listCardThatMeetLevelRequirment.push(element);
             }
         });
-    }
+        }
         return listCardThatMeetLevelRequirment;
     }
     getOnlyCardNames(){
@@ -34,18 +34,19 @@ const processcard = class processcard{
         });
         return arrayOfCardNames;
     }
-    getMostExpensiveCardPrice(fromWhichStore){
+    getMostExpensiveCardPrice(onlineStoreToBuyCards){
         let placesToBuyCards= ["tcgplayer", "ebay", "amazon", "coolstuffinc"];
-        let mostExpensiveCard = null;
-        let temp={}
-        if(placesToBuyCards.includes(fromWhichStore)){
-            this.mapOfCardInformations.forEach(value =>{
-                value.card_prices[fromWhichStore]
-
+        let mostExpensiveCard = {card: null, cardPrice: 0}
+        let correctPricingName = onlineStoreToBuyCards.concat("_price")
+        if(placesToBuyCards.includes(onlineStoreToBuyCards)){
+            this.mapOfCardInformations.forEach(card =>{
+                if(mostExpensiveCard.card == null || card.card_prices[0][correctPricingName] > mostExpensiveCard.cardPrice){
+                    mostExpensiveCard.card = card
+                    mostExpensiveCard.cardPrice = card.card_prices[0][correctPricingName];
+                }
             });
         }
-        return mostExpensiveCard;
-
+        return mostExpensiveCard.card;
     }
 }
 module.exports = processcard;

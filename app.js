@@ -2,37 +2,39 @@ const express = require('express');
 const fetch = require('node-fetch');
 const app = express();
 const port = 3000;
+const processcard = require('./processcard');
 const url = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?race=dragon';
+let cardJson;
 
+fetch(url).then(response =>{
+  return response.json()
+}).then( data => {
+  cardJson=data
+})
 
-async function getDataForDragonCardsInYugioh(url){
-    let response = await fetch(url);
-    let jsonObjectsCards = await response.json();
-    let dataOFCards = await jsonObjectsCards;
-    dataOFCards.data.forEach(entry =>{
-        arrayDragoncards.push(new monstercard(entry.name, entry.atk, entry.def, entry.attribute, entry.card_prices))
-   });
-}
-function makeSureListPopulated(){
-  getDataForDragonCardsInYugioh(url)
-   while (arrayDragoncards.length === 0){
-        if(arrayDragoncards.length !== 0){
-           console.log("cachec is populated")
-           break;
-        }
-   }
-}
-
+ 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  let cardProcesser = new processcard(cardJson)
+    res.json(cardProcesser.getAllCardInformation())  
+});
+
+app.get('/mostexpensivecardprice/:onlineStoreName', (req, res) => {
+  let cardProcesser = new processcard(cardJson)
+  return res.json(cardProcesser.getMostExpensiveCardPrice(req.params.onlineStoreName))
 })
 
-app.get('/cities', (req, res) => {
-  return res.json(cities)
+app.get('/allCardNames', (req, res) => {
+  let cardProcesser = new processcard(cardJson)
+  return res.json(cardProcesser.getOnlyCardNames())
 })
 
-app.get('/populations', (req, res) => {
-  return res.json(populations)
+app.get('/findAllCardWithGivenLevel/:level', (req, res) => {
+  let cardProcesser = new processcard(cardJson)
+  return res.json(cardProcesser.findAllCardWithSpecifiedLevel(parseInt(req.params.level)))
+})
+app.get('/cardinformation/:nameCard', (req, res) => {
+  let cardProcesser = new processcard(cardJson)
+  return res.json(cardProcesser.getInformationByCardName(req.params.nameCard))
 })
 
 module.exports = app;
