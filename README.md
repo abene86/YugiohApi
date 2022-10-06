@@ -8,7 +8,7 @@
 
 * **Student Name: Abenezer Gebeyehu** 
 * **Student G-Number: G01281469** 
-* **Heroku Deployment URL:**
+* **Heroku Deployment URL:https://agebeyeh-swe-432.herokuapp.com/**
 
 ### Documentation of your 7 Scenarios
 
