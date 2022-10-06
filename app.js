@@ -1,33 +1,40 @@
-const express = require('express')
-const fetch = require('node-fetch')
-const app = express()
-const port = 3000
-
+const express = require('express');
+const fetch = require('node-fetch');
+const app = express();
+const port = 3000;
+const processcard = require('./processcard');
 const url = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?race=dragon';
+let cardJson;
 
-async function getDataForDragonCardsInYugioh(url){
-    let response = await fetch(url);
-    let jsonObjectsCards = await response.json();
-    let dataOFCards = await jsonObjectsCards;
-    return dataOFCards;
-}
+fetch(url).then(response =>{
+  return response.json()
+}).then( data => {
+  cardJson=data
+})
 
-let dataOfCards = getDataForDragonCardsInYugioh(url);
-let data;
-dataOfCards.then( result =>{
-    data = result;
-});
-console.log(data)
+ 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  let cardProcesser = new processcard(cardJson)
+    res.json(cardProcesser.getAllCardInformation())  
+});
+
+app.get('/mostexpensivecardprice/:onlineStoreName', (req, res) => {
+  let cardProcesser = new processcard(cardJson)
+  return res.json(cardProcesser.getMostExpensiveCardPrice(req.params.onlineStoreName))
 })
 
-app.get('/cities', (req, res) => {
-  return res.json(cities)
+app.get('/allCardNames', (req, res) => {
+  let cardProcesser = new processcard(cardJson)
+  return res.json(cardProcesser.getOnlyCardNames())
 })
 
-app.get('/populations', (req, res) => {
-  return res.json(populations)
+app.get('/findAllCardWithGivenLevel/:level', (req, res) => {
+  let cardProcesser = new processcard(cardJson)
+  return res.json(cardProcesser.findAllCardWithSpecifiedLevel(parseInt(req.params.level)))
+})
+app.get('/cardinformation/:nameCard', (req, res) => {
+  let cardProcesser = new processcard(cardJson)
+  return res.json(cardProcesser.getInformationByCardName(req.params.nameCard))
 })
 
 module.exports = app;
